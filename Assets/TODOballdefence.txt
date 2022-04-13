@@ -1,0 +1,123 @@
+Scaler vars for distance between pointA and pointB to randomize where the ball would be instantiated
+Directional que where the actor wants to go
+Actor gate
+Actor fence
+Camera mode orthographic
+
+2 Factions[DEBUGGING]
+Game round max[DEBUGGING]
+Game round time
+Faction game phase : attacker, defender. turn based each round
+Actor max detection radius
+Faction's area
+Faction alias
+Ball spawned in randomly generated inside faction's(attacker) area
+
+Collider solid to solid
+Collider solid to any actor enable at certain condition
+Collider system always enable
+
+First time create do raycast thru fence
+
+Energy bar empty when round starts[DEBUGGING]
+Energy bar regenerated overtime by speed(1s)
+Actor energy meter[DEBUGGING]
+Highlight current active actor energy
+
+Tap on faction area mesh to spawn based on faction's game phase
+Tap on attacked land will spawn attacker
+Tap on defensed land will spawn defender
+
+Every Actor has state : inactive, active, standby[DEBUGGING]
+
+Behavior :
+ATTACKER:
+Attacker spawn cost 2 energy, inactive 3s on spawned
+when active state :
+chase bomb/ball until it is hold by an atacker
+
+if holding ball then :
+go to oppoponent gate at speed-6
+can be caught by oppoponent's defender
+if caught, pass the ball/bomb to nearest active player with speed 7 and become inactive 4s
+
+if no ball/bomb to chase or hold, go straight to oppoponet landfield with speed 5
+when collide with fence with then destroy
+cannot be caught, go through all actor
+when inactive state :
+greyscale until active state
+stop moving and let any soldier pass through
+
+DEFENDER:
+Detection circle is only available at standbystate
+Spawn energy cost 2 ponts, inactive on spawn for 3s
+when active state :
+Standby
+When attacker with ball enter detection circle
+set target as the attacker and chase with speed of 5
+if target caight, set as inactive for 4s
+when inactive state :
+greyscale until active state
+moving back to spawn pos with speed of 8
+let anything go thorugh it
+
+After 5 match
+Game over if the player has less win than opponents
+Player will be winner if have win count than enemy
+If win check is equal. enter pinalty game
+
+Rush mode for last 15s in each round
+energy regenerate faster
+defender reactiate when back to position
+attacker carry the ball moves slower
+
+Game Ends:
+The ball reach opponents gate, attacker win
+when timeout, ball is not on opponents gate, match is draw
+when attacker is caught but no other attacker is available to pass the ball, defender wins
+
+LookupTable :
+Game 5 match, 140sec each, max energy bar 6
+Soldier :
+energy regenerate : attacker.. 0.5/s defender.. 0.5/scale
+Energy cost : attacker.. 2 points.. defender.. 3points
+spawn time : attacker.. 0,5/s defender.. 0.5/s 
+Reactive time : attacker.. 2.5s defender.. 4s
+Normal speed : attacker.. 1.5*deltaTime defender.. 1.08deltaTime
+Carry speed : atacker .75*deltaTime
+Ball speed : 1.5*deltaTime
+ReturnSpedd : defender.. 2*deltaTime
+Detection range : 35% width of battlefield
+
+Animation when caught one another
+Animation for defender vision
+Animation when soldier is spawn 
+animation when attacker is destroyed at opponents fence
+
+Detect ARSurface and put gameplay on top of it
+Switch between normal and ARMode
+particle VFX on touch with fence
+Soldier when in countdown await reactivation
+Defender detection circle
+
+Penalty mode :
+only 1 attacker available and always start in player's gate
+generate maze inside map with open way to go from opponent gate to player gate
+ball will be generated inside maze
+there set a limit time when player can get to ball and then opponent gate
+
+Add game menu
+Add pause menu
+win lose screen each match
+Add bgm
+Add sfx
+use cinemacihne as intro
+
+ARMode
+Button to swith to ARMode inrealtime
+Placement
+show/hide visualization scanned area
+has pinch to scale game world
+has swipe to rotate horizontally the game world
+Display shadow for game board
+Use of URP
